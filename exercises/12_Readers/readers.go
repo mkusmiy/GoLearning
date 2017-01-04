@@ -1,6 +1,7 @@
 package readers
 
 import (
+	"bytes"
 	"io"
 	"strings"
 )
@@ -8,7 +9,10 @@ import (
 // Combine returns an io.Reader which represents
 // the contents of a and b.
 func Combine(a, b io.Reader) io.Reader {
-	return a
+	buffer := new(bytes.Buffer)
+	buffer.ReadFrom(a)
+	buffer.ReadFrom(b)
+	return buffer
 }
 
 // always reader always fills the read buffer with
@@ -26,5 +30,9 @@ func (a *alwaysReader) Read(buf []byte) (int, error) {
 
 // AReader returns an io.Reader which returns n 'A' characters
 func AReader(n int) io.Reader {
-	return strings.NewReader("AAAAAAAAAA")
+	reader := new(bytes.Buffer)
+	for i := 0; i < n; i++ {
+		reader.ReadFrom(strings.NewReader("A"))
+	}
+	return reader
 }
