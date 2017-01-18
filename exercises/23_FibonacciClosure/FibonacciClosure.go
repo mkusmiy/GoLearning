@@ -23,6 +23,15 @@ func fibonacci() func(recfunc, int) int {
 	}
 }
 
+// easier way to do it (from internet)
+func fibonacci1() func() int {
+	first, second := 0, 1
+	return func() int {
+		first, second = second, first+second
+		return first
+	}
+}
+
 func main() {
 	f := fibonacci()
 	for i := 0; i < 20; i++ {

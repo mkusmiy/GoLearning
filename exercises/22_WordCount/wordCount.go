@@ -6,20 +6,27 @@ import (
 )
 
 func WordCount(s string) map[string]int {
-	m := make(map[string]int)
+	wordMap := make(map[string]int)
 
-	var str []string
-	str = strings.Fields(s)
-	for i := range str {
-		b := str[i]
-		if _, ok := m[b]; ok {
-			m[b]++
-		} else {
-			m[b] = 1
-		}
+	words := strings.Fields(s)
+
+	for _, word := range words {
+		wordMap[word]++
 	}
 
-	return m
+	/*
+		var str []string
+		str = strings.Fields(s)
+		for i := range str {
+			b := str[i]
+			if _, ok := m[b]; ok {
+				m[b]++
+			} else {
+				m[b] = 1
+			}
+		}
+	*/
+	return wordMap
 }
 
 func main() {

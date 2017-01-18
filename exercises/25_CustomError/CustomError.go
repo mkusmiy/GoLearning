@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"math"
 )
@@ -22,7 +21,7 @@ func NSqrt(x float64) (float64, error) {
 			z = 0.5 * (z + x/z)
 		}
 	} else {
-		return 0, errors.New(ErrNegativeSqrt(x).Error())
+		return 0, ErrNegativeSqrt(x)
 	}
 	return z, nil
 }
